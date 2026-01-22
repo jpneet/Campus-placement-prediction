@@ -1,194 +1,152 @@
-# Campus-placement-prediction
-🎓 Campus Placement Prediction using Machine Learning
-📌 Project Overview
+# Campus Placement Prediction
 
-This project focuses on predicting campus placement outcomes of students using machine learning techniques. By analyzing academic performance, skill indicators, and extracurricular involvement, the model estimates whether a student is likely to be placed or not placed.
+This project is a Machine Learning pipeline to predict campus placement outcomes based on student data. It involves data preprocessing, feature engineering, visualization, model training, hyperparameter tuning, ensemble methods, and explainability using SHAP.
 
-The pipeline covers the entire ML lifecycle:
-data preprocessing → visualization → model training → evaluation → hyperparameter tuning → explainability.
+---
 
-📊 Dataset
+## Table of Contents
 
-Source: placedata v2.0 synthetic.csv
+- [Dataset](#dataset)  
+- [Libraries Used](#libraries-used)  
+- [Data Preprocessing](#data-preprocessing)  
+- [Feature Engineering](#feature-engineering)  
+- [Exploratory Data Analysis (EDA)](#exploratory-data-analysis-eda)  
+- [Modeling](#modeling)  
+- [Model Evaluation](#model-evaluation)  
+- [Ensemble Learning](#ensemble-learning)  
+- [Hyperparameter Tuning](#hyperparameter-tuning)  
+- [Explainability](#explainability)  
+- [Visualization](#visualization)  
 
-Type: Synthetic dataset
+---
 
-Target Variable: PlacementStatus (Placed / Not Placed)
+## Dataset
 
-Features include:
+- The dataset `placedata v2.0 synthetic.csv` contains synthetic data for students including features like CGPA, soft skills, internships, projects, workshops, aptitude test scores, extracurricular activities, and placement training.
+- Target variable: `PlacementStatus` (Placed / Not Placed)
+- Unique identifier `StudentID` is dropped during preprocessing.
 
-Academic scores (CGPA, SSC, HSC)
+---
 
-Aptitude test scores
+## Libraries Used
 
-Soft skills rating
+- `numpy`  
+- `pandas`  
+- `matplotlib`  
+- `seaborn`  
+- `scikit-learn`  
+- `xgboost`  
+- `imblearn` (SMOTE)  
+- `shap`  
 
-Internships, projects, workshops
+---
 
-Placement training & extracurricular activities
+## Data Preprocessing
 
-⚙️ Technologies & Libraries
+- Dropped `StudentID` column to remove irrelevant identifiers.
+- Encoded categorical variables using `LabelEncoder`.
+- Split dataset into features `X` and target `y`.
+- Train-test split: 80%-20% with stratification to avoid class imbalance.
+- Feature scaling using `StandardScaler`.
+- Addressed class imbalance with SMOTE.
 
-Programming Language: Python
+---
 
-Core Libraries:
+## Feature Engineering
 
-NumPy, Pandas
+- Created combined features for better predictive power:  
+  - `CGPA_Aptitude = CGPA * AptitudeTestScore`  
+  - `SoftSkills_Extracurricular = SoftSkillsRating + ExtracurricularActivities`  
 
-Matplotlib, Seaborn
+---
 
-Machine Learning:
+## Exploratory Data Analysis (EDA)
 
-Scikit-learn
+- Descriptive statistics for numerical features.
+- Correlation heatmap for all features.
+- Countplots for `PlacementStatus` and categorical features (`PlacementTraining`, `ExtracurricularActivities`).
+- Boxplots for numerical features vs placement status.
 
-XGBoost
+---
 
-Imbalanced-learn (SMOTE)
+## Modeling
 
-Explainability:
+Models trained and evaluated:
 
-SHAP
+1. Support Vector Machine (SVM)  
+2. Logistic Regression  
+3. Random Forest  
+4. Decision Tree  
+5. K-Nearest Neighbors (KNN)  
+6. XGBoost  
+7. AdaBoost  
+8. Gradient Boosting  
 
-🧹 Data Preprocessing
+- Train and test accuracies calculated.
+- Confusion matrices and ROC-AUC scores evaluated.
 
-Removed irrelevant identifiers (StudentID)
+---
 
-Label-encoded categorical features
+## Model Evaluation
 
-Standardized numerical features using StandardScaler
+- Performance metrics include:
+  - Accuracy
+  - ROC-AUC score
+  - Confusion Matrix
+- Stratified K-Fold cross-validation (5-fold) for ROC-AUC evaluation.
 
-Handled class imbalance using SMOTE
+---
 
-Engineered new features:
+## Ensemble Learning
 
-CGPA_Aptitude = CGPA × AptitudeTestScore
+- Soft Voting Classifier combining:
+  - Logistic Regression  
+  - Random Forest  
+  - XGBoost  
+- Voting Classifier with weights and soft voting improves overall prediction.
+- Threshold tuning performed to maximize accuracy.
 
-SoftSkills_Extracurricular = SoftSkillsRating + ExtracurricularActivities
+---
 
-📈 Exploratory Data Analysis
+## Hyperparameter Tuning
 
-Correlation heatmap
+- **Random Forest**: GridSearchCV to optimize `n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `max_features`.
+- **XGBoost**: RandomizedSearchCV for `n_estimators`, `max_depth`, `learning_rate`, `subsample`, `colsample_bytree`.
 
-Placement distribution analysis
+---
 
-Count plots for categorical features
+## Explainability
 
-Boxplots for numerical features vs placement status
+- SHAP used to explain feature importance for:
+  - Individual models
+  - Voting Classifier (Logistic Regression component)
+- Summary plots and bar plots generated for global interpretability.
 
-🤖 Machine Learning Models Implemented
+---
 
-The following models were trained and evaluated:
+## Visualization
 
-Logistic Regression
+- Confusion matrices and ROC curves for train/test sets.
+- Comparison bar plots for train vs test accuracy across models.
+- Visualizations aid in understanding model performance and feature contributions.
 
-Support Vector Machine (SVM)
+---
 
-Random Forest
+## Usage
 
-Decision Tree
-
-K-Nearest Neighbors (KNN)
-
-AdaBoost
-
-Gradient Boosting
-
-XGBoost
-
-🗳️ Ensemble Learning
-
-Voting Classifier (Soft Voting) using:
-
-Logistic Regression
-
-SVM
-
-AdaBoost
-
-Custom weights applied to improve performance
-
-Threshold tuning performed for optimal accuracy
-
-📐 Model Evaluation Metrics
-
-Accuracy
-
-ROC-AUC Score
-
-Confusion Matrix
-
-ROC Curves
-
-Train vs Test Accuracy comparison
-
-Stratified 5-Fold Cross-Validation (ROC-AUC)
-
-🔍 Hyperparameter Tuning
-
-GridSearchCV for Random Forest
-
-RandomizedSearchCV for XGBoost
-
-Optimized using ROC-AUC as the primary metric
-
-🧠 Model Explainability (XAI)
-
-Implemented SHAP (SHapley Additive exPlanations) to:
-
-Identify globally important features
-
-Visualize feature impact on placement prediction
-
-Used appropriate explainers:
-
-TreeExplainer
-
-LinearExplainer
-
-KernelExplainer (for complex models)
-
-📊 Visual Performance Analysis
-
-Train vs Test confusion matrices
-
-ROC curves for train and test sets
-
-Comparative bar chart of model accuracies
-
-🚀 Key Outcomes
-
-Ensemble models outperform individual classifiers
-
-CGPA, aptitude score, soft skills, and internships play a major role in placement
-
-SHAP enhances interpretability, making the model suitable for academic and real-world use
-
-▶️ How to Run
-
-Clone the repository
-
-Install dependencies:
-
+1. Install required libraries:
+   
+bash
 pip install numpy pandas matplotlib seaborn scikit-learn xgboost imbalanced-learn shap
 
 
-Place the dataset file in the project directory
-
-Run the notebook:
-
-jupyter notebook Campus_placement.ipynb
-
-📌 Future Enhancements
-
-Deployment using Flask or FastAPI
-
-Real-time prediction dashboard
-
-Feature selection using SHAP-based pruning
-
-Integration with student information systems
-
-👤 Author
+Author
 
 Japneet Singh
-Machine Learning Enthusiast | Data Science | AI
+Computer Science & Engineering | ML/AI Enthusiast
+
+
+
+
+```bash
+pip install numpy pandas matplotlib seaborn scikit-learn xgboost imbalanced-learn shap
