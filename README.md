@@ -135,9 +135,10 @@ Models trained and evaluated:
 ## Usage
 
 1. Install required libraries:
-   
-bash
+```bash
 pip install numpy pandas matplotlib seaborn scikit-learn xgboost imbalanced-learn shap
+
+
 
 
 Author
@@ -145,8 +146,3 @@ Author
 Japneet Singh
 Computer Science & Engineering | ML/AI Enthusiast
 
-
-
-
-```bash
-pip install numpy pandas matplotlib seaborn scikit-learn xgboost imbalanced-learn shap
