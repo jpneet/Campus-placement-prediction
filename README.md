@@ -139,10 +139,3 @@ Models trained and evaluated:
 pip install numpy pandas matplotlib seaborn scikit-learn xgboost imbalanced-learn shap
 
 
-
-
-Author
-
-Japneet Singh
-Computer Science & Engineering | ML/AI Enthusiast
-
