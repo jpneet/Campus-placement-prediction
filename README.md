@@ -64,11 +64,11 @@ placedata_v2.0_synthetic.csv
 
 # Run all cells to train and evaluate models
 
-Inference
+# Inference
 
 Apply identical preprocessing → generate engineered features → scale features → predict using the trained Logistic Regression model.
 
-Author
+# Author
 
 Japneet Singh
 B.Tech (Prefinal Year) | Machine Learning & Data Science
