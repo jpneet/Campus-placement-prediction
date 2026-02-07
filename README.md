@@ -1,59 +1,75 @@
-🎓 Campus Placement Prediction | Machine Learning
-Overview
+# 🎓 Campus Placement Prediction | Machine Learning
 
-End-to-end binary classification ML pipeline to predict campus placement outcomes using academic performance, aptitude, skills, and extracurricular indicators.
-Focus on generalization, interpretability, and robust evaluation, not accuracy alone.
+## Overview
+End-to-end **binary classification machine learning pipeline** to predict campus placement outcomes using academic performance, aptitude, skills, and extracurricular indicators.  
+The project emphasizes **generalization, interpretability, and robust evaluation**, not accuracy alone.
 
-Dataset
+---
 
-Source: placedata_v2.0_synthetic.csv
+## Dataset
+- **Source:** `placedata_v2.0_synthetic.csv`
+- **Target:** `PlacementStatus` (Placed / Not Placed)
+- **Features:** CGPA, aptitude scores, soft skills, extracurriculars, training
+- **Preprocessing:** Label encoding, one-hot encoding, scaling, leakage-safe splits
 
-Target: PlacementStatus (Placed / Not Placed)
+---
 
-Features: CGPA, aptitude scores, soft skills, extracurriculars, training
+## Feature Engineering
+- **CGPA_Aptitude** = `CGPA × AptitudeTestScore`
+- **SoftSkills_Extracurricular** = `SoftSkillsRating + ActivityParticipation`
 
-Preprocessing: Label encoding, one-hot encoding, scaling, leakage-safe splits
+---
 
-Feature Engineering
+## Models Evaluated
+- Logistic Regression (**final**)
+- Support Vector Machine (SVM)
+- Random Forest
+- Decision Tree
+- K-Nearest Neighbors (KNN)
+- XGBoost
+- AdaBoost
+- Gradient Boosting
 
-CGPA_Aptitude = CGPA × AptitudeTestScore
+**Validation:** Stratified 5-Fold Cross-Validation (ROC-AUC)
 
-SoftSkills_Extracurricular = SoftSkillsRating + ActivityParticipation
+---
 
-Models Evaluated
+## Results
+**Best Overall Model:** **Logistic Regression**
 
-Logistic Regression (final) · SVM · Random Forest · Decision Tree · KNN · XGBoost · AdaBoost · Gradient Boosting
-Validation: Stratified 5-Fold Cross-Validation (ROC-AUC)
+- **ROC-AUC (CV):** 0.8769 ± 0.0132  
+- **Test Accuracy:** **80.90%**  
+- **F1-Score:** **0.7729**
 
-Results
+Balanced precision–recall, minimal overfitting, high interpretability, and deployment readiness.
 
-Best Overall Model: Logistic Regression
+---
 
-ROC-AUC (CV): 0.8769 ± 0.0132
+## Tech Stack
+- **Language:** Python
+- **Libraries:** NumPy, Pandas, Scikit-learn, XGBoost, Matplotlib, Seaborn
+- **Environment:** Jupyter Notebook / Google Colab
 
-Test Accuracy: 80.90%
+---
 
-F1-Score: 0.7729
-
-Balanced precision–recall, minimal overfitting, high interpretability, deployment-ready.
-
-Tech Stack
-
-Python · NumPy · Pandas · Scikit-learn · XGBoost · Matplotlib · Seaborn
-Jupyter / Google Colab
-
-Run Instructions
-
+## Run Instructions
 ```bash
-1. Open Campus_Placement.ipynb
-2. Load placedata_v2.0_synthetic.csv
-3. Run all cells
+# Open the notebook
+Campus_Placement.ipynb
+
+# Load dataset
+placedata_v2.0_synthetic.csv
 ```
 Inference
 
-Apply identical preprocessing → generate engineered features → scale → predict using trained Logistic Regression model.
+Apply identical preprocessing → generate engineered features → scale features → predict using the trained Logistic Regression model.
 
 Author
 
 Japneet Singh
-B.Tech (Prefinal Year) | ML & Data Science
+B.Tech (Prefinal Year) | Machine Learning & Data Science
+
+
+
+
+# Run all cells to train and evaluate models
